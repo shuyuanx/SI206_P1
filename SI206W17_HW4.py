@@ -59,11 +59,11 @@ except:
 soup = BeautifulSoup(text_from_site, 'html.parser')
 
 nytimes_headlines = soup.find_all(class_="story-heading")
-for story_heading in nytimes_headlines:
-	if (story_heading.a):
-		print(story_heading.a.text.replace("\n", " ").strip())
-	else:
-		print(story_heading.contents[0].replace("\n", " ").strip())
+#for story_heading in nytimes_headlines:
+	#if (story_heading.a):
+	#	print(story_heading.a.text.replace("\n", " ").strip())
+	#else:
+	#	print(story_heading.contents[0].replace("\n", " ").strip())
 		
 
 #####################
@@ -98,7 +98,9 @@ umsi_titles = {}
 ## Grab the text of each of those elements and put them in the dictionary umsi_titles properly
 
 
-
+for person in people:
+	print(person)
+	
 
 
 
