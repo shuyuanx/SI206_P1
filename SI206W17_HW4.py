@@ -99,7 +99,7 @@ umsi_titles = {}
 
 
 for person in people:
-	print(person)
+	print(person.div)
 	
 
 
