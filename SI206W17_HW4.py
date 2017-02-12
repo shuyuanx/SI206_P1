@@ -58,13 +58,22 @@ except:
 
 soup = BeautifulSoup(text_from_site, 'html.parser')
 
-nytimes_headlines = soup.find_all(class_="story-heading")
-#for story_heading in nytimes_headlines:
-	#if (story_heading.a):
-	#	print(story_heading.a.text.replace("\n", " ").strip())
-	#else:
-	#	print(story_heading.contents[0].replace("\n", " ").strip())
-		
+headlines = soup.find_all(class_="story-heading")
+nytimes_headlines = []
+
+for story_heading in headlines:
+	if (story_heading.a):
+		#print(story_heading.a.text.replace("\n", " ").strip())
+		nytimes_headlines.append(story_heading.a.text.replace("\n", " ").strip())
+	else:
+		#print(story_heading.contents[0].replace("\n", " ").strip())
+		nytimes_headlines.append(story_heading.text.replace("\n", " ").strip())
+
+nytimes_headlines = nytimes_headlines[:10]
+#for head in nytimes_headlines:
+#	print(head)
+
+
 
 #####################
 
@@ -99,13 +108,10 @@ umsi_titles = {}
 
 
 for person in people:
-	print(person.div)
+	name = (person.find_all(class_="field-name-title"))[0].text
+	title = (person.find_all(class_="field-name-field-person-titles"))[0].text
+	umsi_titles[name] = title
 	
-
-
-
-
-
 
 
 ######### UNIT TESTS; DO NOT CHANGE ANY CODE BELOW THIS LINE #########
