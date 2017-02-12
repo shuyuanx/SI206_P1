@@ -70,6 +70,8 @@ for story_heading in headlines:
 		nytimes_headlines.append(story_heading.text.replace("\n", " ").strip())
 
 nytimes_headlines = nytimes_headlines[:10]
+
+
 #for head in nytimes_headlines:
 #	print(head)
 
