@@ -88,19 +88,24 @@ def get_data_with_userinput():
 		twitter_results = api.search(q=search_text) # get it from the internet
 		# but also, save in the dictionary to cache it!
 		CACHE_DICTION[unique_identifier] = twitter_results # add it to the dictionary -- new key-val pair
-		# and then write the whole cache dictionary, now with new info added, to the file, so it'll be there even after your program closes!
+		# and then write the whole cache dictionary, now wi3th new info added, to the file, so it'll be there even after your program closes!
 		f = open(CACHE_FNAME,'w') # open the cache file for writing
 		f.write(json.dumps(CACHE_DICTION)) # make the whole dictionary holding data and unique identifiers into a json-formatted string, and write that wholllle string to a file so you'll have it next time!
 		f.close()
 
-	results_list = twitter_results["statuses"]
+	return twitter_results
+	
+
+
+def main():
+	results = get_data_with_userinput()
+	results_list = results["statuses"]
+	print()
 	results_list = results_list[:3]
 	for tweet in results_list:
-		print(tweet["text"])
-		print(tweet["created_at"])
-		print("\n")
-		print("\n")
+		print("TEXT: ", tweet["text"])
+		print("CREATED AT: ", tweet["created_at"])
+		print()
 
-
-
-get_data_with_userinput()
+if __name__ == "__main__":
+	main()
