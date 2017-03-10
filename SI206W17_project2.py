@@ -1,7 +1,7 @@
 ## SI 206 W17 - Project 2 
 
 ## COMMENT HERE WITH:
-## Your name:
+## Your name: Shuyuan Xiao
 ## Anyone you worked with on this project:
 
 ## Below we have provided import statements, comments to separate out the parts of the project, instructions/hints/examples, and at the end, tests. See the PDF of instructions for more detail. 
@@ -16,6 +16,7 @@ import requests
 import tweepy
 import twitter_info # Requires you to have a twitter_info file in this directory
 from bs4 import BeautifulSoup
+import re
 
 ## Tweepy authentication setup
 ## Fill these in in the twitter_info.py file
@@ -33,7 +34,28 @@ api = tweepy.API(auth, parser=tweepy.parsers.JSONParser())
 
 ## Write the code to begin your caching pattern setup here.
 
+cache_filename = "html_data_from_site.html"
+try:
+  #try to open up the file with data in it that you want to use in your program
+  f = open(cache_filename,'r') #or rb if you had to write it with wb  
+  text_data_from_site = f.read() 
+  f.close()
+except:
+  # if that causes an error (eg if there was no such file)
+  # <code to get data with the requests module> e.g.
+  r = requests.get("yoursiteurlhere.com")
+  text_data_from_site = r.text # get the text attribute from the response object -- all the html and stuff from that site
+  f = open(cache_filename,"w") # open a file to WRITE the data to since you didn't have one
+  f.write(text_data_from_site)
+  f.close()
 
+  CACHE_FNAME = "cached_data_socialmedia.json"
+try:
+	cache_file = open(CACHE_FNAME,'r')
+	cache_contents = cache_file.read()
+	CACHE_DICTION = json.loads(cache_contents)
+except:
+	CACHE_DICTION = {}
 
 
 ## PART 1 - Define a function find_urls.
@@ -45,7 +67,10 @@ api = tweepy.API(auth, parser=tweepy.parsers.JSONParser())
 ## find_urls("I love looking at websites like http://etsy.com and http://instagram.com and stuff") should return ["http://etsy.com","http://instagram.com"]
 ## find_urls("the internet is awesome #worldwideweb") should return [], empty list
 
-
+def find_urls(string input):
+	regex = r"http:\/\/\S+\.\S+"
+	result = re.findall(regex, input)
+	return result
 
 
 
