@@ -111,7 +111,6 @@ umsi_titles = {}
 ## Find the container that holds the title that belongs to that person (HINT: a class name)
 ## Grab the text of each of those elements and put them in the dictionary umsi_titles properly
 
-
 for person in people:
 	name = (person.find_all(class_="field-name-title"))[0].text
 	title = (person.find_all(class_="field-name-field-person-titles"))[0].text
