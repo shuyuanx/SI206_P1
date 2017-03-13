@@ -1,4 +1,5 @@
 import requests
+import re
 
 base_url = "https://www.si.umich.edu/directory?field_person_firstname_value=&field_person_lastname_value=&rid=All"
 htmlStrings = [];
